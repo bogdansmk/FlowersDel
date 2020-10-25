@@ -1,32 +1,18 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  KeyboardAvoidingView,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-import {Navbar} from './src/components/Navbar/Navbar';
+import {StyleSheet, Keyboard, TouchableWithoutFeedback} from 'react-native';
 import colors from './src/res/colors';
-import LoginScreen from './src/screens/LoginScreen';
+import AppNavigator from './src/navigation/AppNavigation';
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.app}>
-      <View style={{flex: 1}}>
-        <KeyboardAvoidingView
-          style={{flex: 1}}
-          behavior="height"
-          enabled={false}>
-          {/*<ScrollView style={styles.content}>*/}
-          <LoginScreen />
-          {/*</ScrollView>*/}
-        </KeyboardAvoidingView>
-        <Navbar />
-      </View>
-    </SafeAreaView>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+        console.log('pressed');
+      }}>
+      <AppNavigator />
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -36,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   content: {
+    flex: 1,
     paddingHorizontal: 15,
   },
 });
