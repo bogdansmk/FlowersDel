@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import colors from '../res/colors';
+import fonts from '../res/fonts';
 
 const LoginScreen = (props) => {
   let [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ const LoginScreen = (props) => {
           autoCorrect={false}
           keyboardType="email-address"
           placeholder="Enter your email"
+          placeholderTextColor={colors.textColor}
         />
         <TextInput
           style={styles.input}
@@ -42,6 +44,7 @@ const LoginScreen = (props) => {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Enter your password"
+          placeholderTextColor={colors.textColor}
           secureTextEntry={true}
         />
         <TouchableOpacity style={[styles.input, styles.button]} onPress={login}>
@@ -53,10 +56,7 @@ const LoginScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-  login: {
-    flex: 1,
-    // alignItems: 'center',
-  },
+  login: {},
   greeting: {
     marginTop: '55%',
     marginBottom: 40,
@@ -66,11 +66,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   heading: {
-    textAlign: 'center',
-    fontSize: 25,
-    color: colors.headingColor,
+    ...fonts.heading,
   },
   text: {
+    ...fonts.text,
     textAlign: 'center',
   },
   input: {
@@ -80,20 +79,16 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: colors.textColor,
     paddingHorizontal: 16.5,
-    fontSize: 15,
-    color: colors.headingColor,
     marginBottom: 12,
+    ...fonts.text,
+    color: colors.headingColor,
     //11
   },
   button: {
     width: 120,
     justifyContent: 'center',
   },
-  buttonText: {
-    fontSize: 20,
-    color: colors.headingColor,
-    textAlign: 'center',
-  },
+  buttonText: {...fonts.smallHeading},
 });
 
 export default LoginScreen;
