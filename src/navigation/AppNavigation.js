@@ -5,6 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import colors from '../res/colors';
 import LoginScreen from '../screens/LoginScreen';
 import SearchScreen from '../screens/SearchScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,6 +40,16 @@ const AppNavigator = () => {
             tabBarLabel: 'Search',
             tabBarIcon: ({focused, color, size}) => {
               return <Image source={require('../assets/icons/search.png')} />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({focused, color, size}) => {
+              return <Image source={require('../assets/icons/user.png')} />;
             },
           }}
         />
