@@ -19,8 +19,9 @@ const UserProfile = (props) => {
 
 const styles = StyleSheet.create({
   profile: {
-    paddingHorizontal: 15,
-    paddingTop: 15,
+    // paddingHorizontal: 15,
+    // paddingTop: 15,
+    marginBottom: 25,
     flexDirection: 'row',
   },
   avatar: {
