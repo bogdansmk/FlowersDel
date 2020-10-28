@@ -17,6 +17,10 @@ const fonts = {
     fontSize: 15,
     color: colors.textColor,
   },
+  smallText: {
+    fontSize: 12,
+    color: colors.textColor,
+  },
   largeText: {
     fontSize: 18,
     color: colors.textColor,
