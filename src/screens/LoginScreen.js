@@ -5,12 +5,14 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Button,
+  KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}) => {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
 
@@ -19,11 +21,11 @@ const LoginScreen = (props) => {
   };
 
   return (
-    <View style={styles.login}>
+    <ScrollView contentContainerStyle={styles.login}>
       <View style={styles.greeting}>
         <Text style={styles.heading}>Добро пожаловать!</Text>
         <Text style={styles.text}>
-          Создайте бесплатно аккаунт, чтобы начать пользоваться приложением
+          Войдите в свой аккаунт, чтобы начать пользоваться приложением
         </Text>
       </View>
       <View style={styles.form}>
@@ -34,7 +36,7 @@ const LoginScreen = (props) => {
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
-          placeholder="Enter your email"
+          placeholder="Введите Ваш email"
           placeholderTextColor={colors.textColor}
         />
         <TextInput
@@ -43,20 +45,27 @@ const LoginScreen = (props) => {
           value={password}
           autoCapitalize="none"
           autoCorrect={false}
-          placeholder="Enter your password"
+          placeholder="Введите Ваш пароль"
           placeholderTextColor={colors.textColor}
           secureTextEntry={true}
         />
         <TouchableOpacity style={[styles.input, styles.button]} onPress={login}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Войти</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+          <Text style={styles.link}>Создать новый аккаунт</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  login: {},
+  login: {
+    padding: 15,
+    paddingBottom: 40,
+  },
   greeting: {
     marginTop: '55%',
     marginBottom: 40,
@@ -74,7 +83,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 45,
-    width: '65%',
+    width: '70%',
     borderWidth: 1,
     borderRadius: 25,
     borderColor: colors.textColor,
@@ -89,6 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: {...fonts.smallHeading},
+  link: {
+    color: colors.green,
+  },
 });
 
 export default LoginScreen;
