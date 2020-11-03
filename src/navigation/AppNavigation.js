@@ -7,18 +7,15 @@ import {
   Button,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../res/colors';
-import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import RegistrationScreen from '../screens/RegistrationScreen';
 
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = () => {
+const AppNavigation = () => {
   return (
     <NavigationContainer>
       {/*<KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={false}>*/}
@@ -86,30 +83,6 @@ const AppNavigator = () => {
   );
 };
 
-const Stack = createStackNavigator();
-
-export const AppStackNavigator = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{headerShown: false, headerTitle: 'Авторизация'}}
-        />
-        <Stack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{
-            // headerShown: false,
-            title: 'Регистрация',
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
-
 const styles = StyleSheet.create({
   navbar: {
     // flex: 1,
@@ -123,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppNavigator;
+export default AppNavigation;

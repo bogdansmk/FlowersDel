@@ -7,9 +7,9 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
 } from 'react-native';
+import AppNavigation from './src/navigation/AppNavigation';
+import AuthNavigation from './src/navigation/AuthNavigation';
 import colors from './src/res/colors';
-import AppNavigator, {AppStackNavigator} from './src/navigation/AppNavigation';
-import LoginScreen from './src/screens/LoginScreen';
 
 const App = () => {
   let isLoggedIn = false;
@@ -21,7 +21,7 @@ const App = () => {
         console.log('pressed');
       }}>
       <KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={true}>
-        {isLoggedIn ? <AppNavigator /> : <AppStackNavigator />}
+        {isLoggedIn ? <AppNavigation /> : <AuthNavigation />}
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
