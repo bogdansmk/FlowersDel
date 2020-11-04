@@ -23,10 +23,10 @@ const LoginScreen = ({navigation}) => {
   return (
     <ScrollView contentContainerStyle={styles.login}>
       <View style={styles.greeting}>
-        <Text style={styles.heading}>Добро пожаловать!</Text>
-        <Text style={styles.text}>
-          Войдите в свой аккаунт, чтобы начать пользоваться приложением
-        </Text>
+        <Text style={styles.heading}>Авторизация</Text>
+        {/*<Text style={styles.text}>*/}
+        {/*  Войдите в свой аккаунт, чтобы начать пользоваться приложением*/}
+        {/*</Text>*/}
       </View>
       <View style={styles.form}>
         <TextInput
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   greeting: {
-    marginTop: '55%',
-    marginBottom: 40,
+    // marginTop: '55%',
+    marginVertical: 20,
   },
   form: {
     width: '100%',
