@@ -6,24 +6,24 @@ import {
   Image,
   ImageBackground,
   TextInput,
-  TouchableOpacity,
+  TouchableHighlight,
   StyleSheet,
 } from 'react-native';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 
-const CatalogItem = (props) => {
+const CatalogItem = ({price, name}) => {
   return (
     <View style={styles.item}>
       <View style={styles.img}>
         <ImageBackground
           style={styles.bgImg}
           source={require('../../assets/images/img6.jpg')}>
-          <Text style={styles.price}>{props.price}</Text>
+          <Text style={styles.price}>{price}</Text>
         </ImageBackground>
       </View>
       <Text style={styles.heading} numberOfLines={1} ellipsizeMode="tail">
-        {props.name}
+        {name}
       </Text>
     </View>
   );
@@ -31,11 +31,15 @@ const CatalogItem = (props) => {
 
 const styles = StyleSheet.create({
   item: {
-    width: '48%',
+    flex: 1,
+    // width: '48%',
+    // width: '98%',
     height: 200,
-    backgroundColor: colors.pale,
+    // backgroundColor: colors.pale,
+    backgroundColor: colors.white,
     borderRadius: 15,
     overflow: 'hidden',
+    elevation: 2, // Shadow for Android
   },
   img: {
     // height: '80%',
