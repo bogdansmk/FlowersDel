@@ -10,27 +10,23 @@ import {
 import AppNavigation from './src/navigation/AppNavigation';
 import AuthNavigation from './src/navigation/AuthNavigation';
 import colors from './src/res/colors';
+import {Provider, useSelector} from 'react-redux';
+import store from './src/redux/store';
 
 const App = () => {
-  let isLoggedIn = false;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-        console.log('pressed');
-      }}>
-      <KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={true}>
-        {isLoggedIn ? <AppNavigation /> : <AuthNavigation />}
-      </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    <KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={true}>
+      {isLoggedIn ? <AppNavigation /> : <AuthNavigation />}
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   // app: {
-  //   flex: 1,
-  //   backgroundColor: colors.white,
+  // flex: 1,
+  // backgroundColor: colors.white,
   // },
   // content: {
   //   flex: 1,
@@ -38,4 +34,8 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default App;
+export default () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
