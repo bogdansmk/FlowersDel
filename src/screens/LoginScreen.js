@@ -5,59 +5,63 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Button,
-  KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
+import {useDispatch} from 'react-redux';
+import {login} from '../redux/authReducer';
+import AppWrapper from '../components/AppWrapper/AppWrapper';
 
 const LoginScreen = ({navigation}) => {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
 
-  const login = () => {
+  const dispatch = useDispatch();
+
+  const auth = () => {
+    dispatch(login());
     //api.login(email, password);
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.login}>
-      <View style={styles.greeting}>
-        <Text style={styles.heading}>Авторизация</Text>
-        {/*<Text style={styles.text}>*/}
-        {/*  Войдите в свой аккаунт, чтобы начать пользоваться приложением*/}
-        {/*</Text>*/}
-      </View>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          value={email}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          placeholder="Введите Ваш email"
-          placeholderTextColor={colors.textColor}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setPassword}
-          value={password}
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholder="Введите Ваш пароль"
-          placeholderTextColor={colors.textColor}
-          secureTextEntry={true}
-        />
-        <TouchableOpacity style={[styles.input, styles.button]} onPress={login}>
-          <Text style={styles.buttonText}>Войти</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
-          <Text style={styles.link}>Создать новый аккаунт</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    <AppWrapper title="Авторизация">
+      <ScrollView contentContainerStyle={styles.login}>
+        <View style={styles.greeting}>
+          <Text style={styles.heading}>Войдите в свой аккаунт</Text>
+        </View>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            placeholder="Введите Ваш email"
+            placeholderTextColor={colors.textColor}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Введите Ваш пароль"
+            placeholderTextColor={colors.textColor}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity
+            style={[styles.input, styles.button]}
+            onPress={auth}>
+            <Text style={styles.buttonText}>Войти</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+            <Text style={styles.link}>Создать новый аккаунт</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </AppWrapper>
   );
 };
 

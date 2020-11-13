@@ -5,12 +5,11 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Button,
-  KeyboardAvoidingView,
   StyleSheet,
 } from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
+import AppWrapper from '../components/AppWrapper/AppWrapper';
 
 const RegistrationScreen = ({navigation}) => {
   let [name, setName] = useState('');
@@ -25,78 +24,79 @@ const RegistrationScreen = ({navigation}) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.registration}>
-      <View style={styles.regMessage}>
-        <Text style={styles.heading}>Создание аккаунта</Text>
-        {/*<Text style={styles.text}>Давайте создадим новый аккаунт</Text>*/}
-      </View>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setName}
-          value={name}
-          autoCorrect={false}
-          placeholder="Имя"
-          placeholderTextColor={colors.textColor}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setLastName}
-          value={lastName}
-          autoCorrect={false}
-          placeholder="Фамилия"
-          placeholderTextColor={colors.textColor}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setNumber}
-          value={number}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="phone-pad"
-          placeholder="Номер телефона"
-          placeholderTextColor={colors.textColor}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setEmail}
-          value={email}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          placeholder="Email"
-          placeholderTextColor={colors.textColor}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setPassword}
-          value={password}
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholder="Пароль"
-          placeholderTextColor={colors.textColor}
-          secureTextEntry={true}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setRepeatedPassword}
-          value={repeatedPassword}
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholder="Повторите свой пароль"
-          placeholderTextColor={colors.textColor}
-          secureTextEntry={true}
-        />
-        <TouchableOpacity
-          style={[styles.input, styles.button]}
-          onPress={register}>
-          <Text style={styles.buttonText}>Создать аккаунт</Text>
+    <AppWrapper title="Регистрация">
+      <ScrollView contentContainerStyle={styles.registration}>
+        <View style={styles.regMessage}>
+          <Text style={styles.heading}>Создание аккаунта</Text>
+        </View>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setName}
+            value={name}
+            autoCorrect={false}
+            placeholder="Имя"
+            placeholderTextColor={colors.textColor}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setLastName}
+            value={lastName}
+            autoCorrect={false}
+            placeholder="Фамилия"
+            placeholderTextColor={colors.textColor}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setNumber}
+            value={number}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="phone-pad"
+            placeholder="Номер телефона"
+            placeholderTextColor={colors.textColor}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
+            placeholder="Email"
+            placeholderTextColor={colors.textColor}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Пароль"
+            placeholderTextColor={colors.textColor}
+            secureTextEntry={true}
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setRepeatedPassword}
+            value={repeatedPassword}
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholder="Подтвердите пароль"
+            placeholderTextColor={colors.textColor}
+            secureTextEntry={true}
+          />
+          <TouchableOpacity
+            style={[styles.input, styles.button]}
+            onPress={register}>
+            <Text style={styles.buttonText}>Создать аккаунт</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.link}>У меня уже есть аккаунт</Text>
         </TouchableOpacity>
-      </View>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.link}>У меня уже есть аккаунт</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      </ScrollView>
+    </AppWrapper>
   );
 };
 
