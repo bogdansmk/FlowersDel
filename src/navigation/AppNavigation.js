@@ -5,15 +5,15 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../res/colors';
 import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import FavouritesScreen from '../screens/FavouritesScreen';
+import ShoppingCartScreen from '../screens/ShoppingCartScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigation = () => {
   return (
     <NavigationContainer>
-      {/*<KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={false}>*/}
       <Tab.Navigator
         initialRouteName="Home"
         sceneContainerStyle={{backgroundColor: colors.darkWhite}}
@@ -79,6 +79,27 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
+          name="ShoppingCart"
+          component={ShoppingCartScreen}
+          options={{
+            tabBarLabel: 'Корзина',
+            tabBarIcon: ({focused, color}) => {
+              return (
+                <Icon
+                  name={focused ? 'cart' : 'cart-outline'}
+                  size={30}
+                  color={color}
+                />
+              );
+            },
+            tabBarBadge: null,
+            tabBarBadgeStyle: {
+              backgroundColor: colors.green,
+              color: 'red',
+            },
+          }}
+        />
+        <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
@@ -95,7 +116,6 @@ const AppNavigation = () => {
           }}
         />
       </Tab.Navigator>
-      {/*</KeyboardAvoidingView>*/}
     </NavigationContainer>
   );
 };
