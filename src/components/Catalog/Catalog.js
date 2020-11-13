@@ -1,32 +1,9 @@
-import React, {useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  FlatList,
-  TouchableWithoutFeedback,
-  Dimensions,
-} from 'react-native';
+import React from 'react';
+import {TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import CatalogItem from './CatalogItem';
-import colors from '../../res/colors';
-import fonts from '../../res/fonts';
+import AppWrapper from '../AppWrapper/AppWrapper';
 
 const Catalog = ({navigation, items, header, title, emptyComponent}) => {
-  const height = Dimensions.get('window').height - 50 - 70;
-
-  // console.log(height);
-
-  const Header = ({title}) => {
-    return (
-      <View style={styles.header}>
-        <Text style={styles.heading}>{title}</Text>
-      </View>
-    );
-  };
-
   const renderItem = ({item, index}) => (
     <TouchableOpacity
       activeOpacity={1.0}
@@ -37,58 +14,21 @@ const Catalog = ({navigation, items, header, title, emptyComponent}) => {
   );
 
   return (
-    <View style={styles.screen}>
-      {header ? header : <Header title={title} />}
-      <View style={[styles.wrapper, {height}]}>
-        <FlatList
-          data={items}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          numColumns={2}
-          ListEmptyComponent={emptyComponent}
-          // ListHeaderComponentStyle={styles.header}
-          contentContainerStyle={styles.content}
-          columnWrapperStyle={styles.catalog}
-        />
-      </View>
-    </View>
+    <AppWrapper header={header} title={title}>
+      <FlatList
+        data={items}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        ListEmptyComponent={emptyComponent}
+        contentContainerStyle={styles.content}
+        columnWrapperStyle={styles.catalog}
+      />
+    </AppWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    // flex: 1,
-    // height: '100%',
-    // paddingBottom: 125,
-    backgroundColor: colors.green,
-    // justifyContent: 'center',
-    // marginBottom: 55,
-  },
-  header: {
-    height: 70,
-    backgroundColor: colors.green,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heading: {
-    ...fonts.smallHeading,
-    color: colors.white,
-    fontWeight: '700',
-  },
-  wrapper: {
-    // height: 500,
-    // flexGrow: 0,
-    // height: '100%',
-    // flex: 1,
-    // paddingVertical: 10,
-    // justifyContent: 'center',
-
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    backgroundColor: colors.darkWhite,
-    elevation: 60,
-    overflow: 'hidden',
-  },
   content: {
     flexGrow: 1,
     paddingVertical: 7.5,
