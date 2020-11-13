@@ -7,18 +7,23 @@ import {
   ImageBackground,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
+import AddToFavButton from './AddToFavButton';
 
-const CatalogItem = ({price, name}) => {
+const CatalogItem = (props) => {
+  const {price, name} = props.item;
+
   return (
     <View style={styles.item}>
       <View style={styles.img}>
         <ImageBackground
           style={styles.bgImg}
           source={require('../../assets/images/img6.jpg')}>
+          <AddToFavButton item={props.item} />
           <Text style={styles.price}>{price}</Text>
         </ImageBackground>
       </View>
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 15,
     overflow: 'hidden',
-    elevation: 2, // Shadow for Android
+    elevation: 2,
   },
   img: {
     // height: '80%',

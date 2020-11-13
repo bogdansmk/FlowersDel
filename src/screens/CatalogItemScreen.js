@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   View,
   ScrollView,
@@ -12,29 +12,50 @@ import {
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AddToFavButton from '../components/Catalog/AddToFavButton';
+import AddToCartButton from '../components/Catalog/AddToCartButton';
+import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 
 const CatalogItemScreen = (props) => {
+  const item = props.route.params.item;
+
   let [stepperVal, setStepperVal] = useState(1);
 
   const increaseVal = () => setStepperVal(stepperVal + 1);
   const decreaseVal = () =>
     stepperVal ? setStepperVal(stepperVal - 1) : false;
 
+  const formatVotes = (votes) => {
+    let n = votes % 10;
+    let str = n > 4 || n === 0 ? 'голосов' : 'голоса';
+    return votes + ' ' + (n === 1 ? 'голос' : str);
+  };
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerRight: () => <AddToFavButton item={item} />,
+    });
+  }, [props.navigation, item]);
+
   return (
     <ScrollView style={styles.screen}>
+      <FocusAwareStatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
       <View style={styles.header}>
         <ImageBackground
           style={styles.img}
           source={require('../assets/images/img6.jpg')}
         />
-        <Text style={styles.price}>1231</Text>
       </View>
       <View style={styles.body}>
-        <Text style={styles.heading}>Название 1</Text>
+        <Text style={styles.heading}>{item.name}</Text>
         <View>
           <Text style={styles.rating}>
             <Icon name="star" size={15} color={colors.yellow} /> 4.5
-            <Text style={styles.ratingCount}> - 124</Text>
+            <Text style={styles.ratingCount}> - {formatVotes(124)}</Text>
           </Text>
         </View>
         <Text style={styles.description}>
@@ -43,7 +64,7 @@ const CatalogItemScreen = (props) => {
           Семантика большого языкового океана.
         </Text>
         <View style={styles.row}>
-          <Text style={styles.price}>249 грн.</Text>
+          <Text style={styles.price}>{item.price}</Text>
           <View style={styles.stepper}>
             <TouchableOpacity onPress={decreaseVal}>
               <Text style={styles.stepperDecr}>-</Text>
@@ -54,15 +75,7 @@ const CatalogItemScreen = (props) => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          style={[
-            styles.input,
-            styles.button,
-            !stepperVal ? {opacity: 0.4} : null,
-          ]}
-          disabled={!stepperVal}>
-          <Text style={styles.buttonText}>Добавить в корзину</Text>
-        </TouchableOpacity>
+        <AddToCartButton stepperVal={stepperVal} item={item} />
       </View>
     </ScrollView>
   );
@@ -75,7 +88,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    height: 300,
+    height: 330, // 300 + 30 of StatusBar
   },
   img: {
     height: '100%',
@@ -91,7 +104,7 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     marginTop: -30,
     backgroundColor: colors.darkWhite,
-    elevation: 120,
+    elevation: 60,
   },
   heading: {
     ...fonts.heading,
@@ -134,6 +147,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     ...fonts.smallHeading,
+    // ...fonts.heading,
     lineHeight: 35,
     borderWidth: 1,
     borderRadius: 10,
@@ -142,7 +156,7 @@ const styles = StyleSheet.create({
   stepperDecr: {
     width: 40,
     height: 40,
-    ...fonts.smallHeading,
+    ...fonts.heading,
     lineHeight: 35,
     borderWidth: 1,
     borderRadius: 10,
@@ -152,23 +166,6 @@ const styles = StyleSheet.create({
     ...fonts.smallHeading,
     fontWeight: '700',
   },
-  input: {
-    height: 45,
-    width: '70%',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: colors.textColor,
-    paddingHorizontal: 16.5,
-    marginBottom: 12,
-    ...fonts.text,
-    color: colors.headingColor,
-    //11
-  },
-  button: {
-    // width: 120,
-    justifyContent: 'center',
-  },
-  buttonText: {...fonts.smallHeading},
 });
 
 export default CatalogItemScreen;
