@@ -1,12 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Keyboard,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {KeyboardAvoidingView, StatusBar} from 'react-native';
 import AppNavigation from './src/navigation/AppNavigation';
 import AuthNavigation from './src/navigation/AuthNavigation';
 import colors from './src/res/colors';
@@ -18,21 +12,11 @@ const App = () => {
 
   return (
     <KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={true}>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.green} />
       {isLoggedIn ? <AppNavigation /> : <AuthNavigation />}
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  // app: {
-  // flex: 1,
-  // backgroundColor: colors.white,
-  // },
-  // content: {
-  //   flex: 1,
-  //   paddingHorizontal: 15,
-  // },
-});
 
 export default () => (
   <Provider store={store}>
