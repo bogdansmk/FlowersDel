@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  Text,
-  Image,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Button,
-} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colors from '../res/colors';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import FavouritesScreen from '../screens/FavouritesScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +16,8 @@ const AppNavigation = () => {
       {/*<KeyboardAvoidingView style={{flex: 1}} behavior="height" enabled={false}>*/}
       <Tab.Navigator
         initialRouteName="Home"
-        sceneContainerStyle={{backgroundColor: 'white'}}
+        sceneContainerStyle={{backgroundColor: colors.darkWhite}}
+        // sceneContainerStyle={{backgroundColor: colors.orange}}
         // sceneContainerStyle={styles.navbar}
         lazy={true}
         backBehavior="history"
@@ -49,7 +45,7 @@ const AppNavigation = () => {
           name="Home"
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Каталог',
             tabBarIcon: ({focused, color}) => {
               return (
                 <Icon
@@ -62,10 +58,31 @@ const AppNavigation = () => {
           }}
         />
         <Tab.Screen
+          name="Favourites"
+          component={FavouritesScreen}
+          options={{
+            tabBarLabel: 'Избранное',
+            tabBarIcon: ({focused, color}) => {
+              return (
+                <Icon
+                  name={focused ? 'heart' : 'heart-outline'}
+                  size={30}
+                  color={color}
+                />
+              );
+            },
+            tabBarBadge: null,
+            tabBarBadgeStyle: {
+              backgroundColor: colors.green,
+              color: 'red',
+            },
+          }}
+        />
+        <Tab.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Профиль',
             tabBarIcon: ({focused, color}) => {
               return (
                 <Icon
