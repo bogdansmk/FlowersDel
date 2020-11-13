@@ -50,8 +50,9 @@ const ShoppingCartScreen = ({navigation}) => {
     <Catalog
       title="Корзина"
       items={items}
-      navigation={navigation}
+      bottomNav={true}
       emptyComponent={<EmptyCart />}
+      navigation={navigation}
     />
   );
 };

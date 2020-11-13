@@ -11,8 +11,10 @@ const AppHeader = ({title}) => {
   );
 };
 
-const AppWrapper = ({header, title, children}) => {
-  const height = Dimensions.get('window').height - 50 - 70; // window - bottomNav - header
+const AppWrapper = ({header, headerHeight, title, bottomNav, children}) => {
+  const bottomNavH = bottomNav ? 50 : 0;
+  const headerH = headerHeight ? headerHeight : 70;
+  const height = Dimensions.get('window').height - bottomNavH - headerH; // window - bottomNav - header
 
   return (
     <View style={styles.screen}>
