@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Text,
+  KeyboardAvoidingView,
+} from 'react-native';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
 
@@ -14,12 +20,19 @@ const AppHeader = ({title}) => {
 const AppWrapper = ({header, headerHeight, title, bottomNav, children}) => {
   const bottomNavH = bottomNav ? 50 : 0;
   const headerH = headerHeight ? headerHeight : 70;
-  const height = Dimensions.get('window').height - bottomNavH - headerH; // window - bottomNav - header
+  const height = Dimensions.get('window').height - bottomNavH - headerH;
 
   return (
     <View style={styles.screen}>
       {header ? header : <AppHeader title={title} />}
-      <View style={[styles.wrapper, {height}]}>{children}</View>
+      <View style={[styles.wrapper, {height}]}>
+        <KeyboardAvoidingView
+          style={{flex: 1}}
+          behavior="height"
+          keyboardVerticalOffset={100}>
+          {children}
+        </KeyboardAvoidingView>
+      </View>
     </View>
   );
 };
