@@ -8,23 +8,32 @@ import {
 } from 'react-native';
 import colors from '../../res/colors';
 import fonts from '../../res/fonts';
+import AppButton from '../AppButton/AppButton';
 
-const AppHeader = ({title}) => {
+const AppHeader = ({title, backButton = true}) => {
   return (
     <View style={styles.header}>
+      {backButton && <AppButton type="backButton" />}
       <Text style={styles.heading}>{title}</Text>
     </View>
   );
 };
 
-const AppWrapper = ({header, headerHeight, title, bottomNav, children}) => {
+const AppWrapper = ({
+  header,
+  headerHeight,
+  title,
+  bottomNav,
+  children,
+  backButton,
+}) => {
   const bottomNavH = bottomNav ? 50 : 0;
   const headerH = headerHeight ? headerHeight : 70;
   const height = Dimensions.get('window').height - bottomNavH - headerH;
 
   return (
     <View style={styles.screen}>
-      {header ? header : <AppHeader title={title} />}
+      {header ? header : <AppHeader title={title} backButton={backButton} />}
       <View style={[styles.wrapper, {height}]}>
         <KeyboardAvoidingView
           style={{flex: 1}}
