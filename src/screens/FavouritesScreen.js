@@ -1,9 +1,8 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import colors from '../res/colors';
-import fonts from '../res/fonts';
+import {View, Text, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import Catalog from '../components/Catalog/Catalog';
+import AppButton from '../components/AppButton/AppButton';
 
 const FavouritesScreen = ({navigation}) => {
   const items = useSelector((state) => state.user.favourites);
@@ -24,11 +23,11 @@ const FavouritesScreen = ({navigation}) => {
     return (
       <View style={styles.emptyFav}>
         <Text>В избранном пока ничего нет</Text>
-        <TouchableOpacity
-          style={[styles.input, styles.button]}
-          onPress={() => navigation.navigate('Catalog')}>
-          <Text style={styles.buttonText}>Перейти в каталог</Text>
-        </TouchableOpacity>
+        <AppButton
+          style={styles.button}
+          text="Перейти в каталог"
+          onPress={() => navigation.navigate('Catalog')}
+        />
       </View>
     );
   };
@@ -50,22 +49,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input: {
-    height: 45,
-    width: '70%',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: colors.textColor,
-    paddingHorizontal: 16.5,
-    marginBottom: 12,
-    ...fonts.text,
-    color: colors.headingColor,
-    //11
-  },
   button: {
-    justifyContent: 'center',
+    width: '70%',
   },
-  buttonText: {...fonts.smallHeading},
 });
 
 export default FavouritesScreen;

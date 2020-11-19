@@ -3,10 +3,7 @@ import {
   View,
   ScrollView,
   Text,
-  TextInput,
   StyleSheet,
-  TouchableOpacity,
-  Image,
   ImageBackground,
 } from 'react-native';
 import colors from '../res/colors';
@@ -15,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AddToFavButton from '../components/Catalog/AddToFavButton';
 import AddToCartButton from '../components/Catalog/AddToCartButton';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
+import AppButton from '../components/AppButton/AppButton';
 
 const CatalogItemScreen = (props) => {
   const item = props.route.params.item;
@@ -66,13 +64,17 @@ const CatalogItemScreen = (props) => {
         <View style={styles.row}>
           <Text style={styles.price}>{item.price}</Text>
           <View style={styles.stepper}>
-            <TouchableOpacity onPress={decreaseVal}>
-              <Text style={styles.stepperDecr}>-</Text>
-            </TouchableOpacity>
+            <AppButton
+              style={styles.stepperButton}
+              text="-"
+              onPress={decreaseVal}
+            />
             <Text style={styles.stepperCount}>{stepperVal}</Text>
-            <TouchableOpacity onPress={increaseVal}>
-              <Text style={styles.stepperIncr}>+</Text>
-            </TouchableOpacity>
+            <AppButton
+              style={styles.stepperButton}
+              text="+"
+              onPress={increaseVal}
+            />
           </View>
         </View>
         <AddToCartButton stepperVal={stepperVal} item={item} />
@@ -143,24 +145,13 @@ const styles = StyleSheet.create({
     height: 40,
     // backgroundColor: colors.pale,
   },
-  stepperIncr: {
+  stepperButton: {
     width: 40,
     height: 40,
     ...fonts.smallHeading,
-    // ...fonts.heading,
-    lineHeight: 35,
-    borderWidth: 1,
     borderRadius: 10,
-    borderColor: colors.textColor,
-  },
-  stepperDecr: {
-    width: 40,
-    height: 40,
-    ...fonts.heading,
-    lineHeight: 35,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: colors.textColor,
+    paddingHorizontal: 0,
+    marginBottom: 0,
   },
   stepperCount: {
     ...fonts.smallHeading,

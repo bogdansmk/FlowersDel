@@ -1,15 +1,9 @@
 import React, {useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import {View, ScrollView, Text, TextInput, StyleSheet} from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import AppWrapper from '../components/AppWrapper/AppWrapper';
+import AppButton from '../components/AppButton/AppButton';
 
 const RegistrationScreen = ({navigation}) => {
   let [name, setName] = useState('');
@@ -24,7 +18,7 @@ const RegistrationScreen = ({navigation}) => {
   };
 
   return (
-    <AppWrapper title="Регистрация">
+    <AppWrapper title="Регистрация" navigation={navigation}>
       <ScrollView contentContainerStyle={styles.registration}>
         <View style={styles.regMessage}>
           <Text style={styles.heading}>Создание аккаунта</Text>
@@ -86,15 +80,17 @@ const RegistrationScreen = ({navigation}) => {
             placeholderTextColor={colors.textColor}
             secureTextEntry={true}
           />
-          <TouchableOpacity
-            style={[styles.input, styles.button]}
-            onPress={register}>
-            <Text style={styles.buttonText}>Создать аккаунт</Text>
-          </TouchableOpacity>
+          <AppButton
+            style={styles.button}
+            text="Создать аккаунт"
+            onPress={register}
+          />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.link}>У меня уже есть аккаунт</Text>
-        </TouchableOpacity>
+        <AppButton
+          text="У меня уже есть аккаунт"
+          onPress={() => navigation.navigate('Login')}
+          type="link"
+        />
       </ScrollView>
     </AppWrapper>
   );
@@ -106,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15,
-    paddingBottom: 40,
+    paddingBottom: 25,
   },
   regMessage: {
     marginVertical: 20,
@@ -137,15 +133,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 200,
-    justifyContent: 'center',
-  },
-  buttonText: {
-    ...fonts.largeText,
-    color: colors.headingColor,
-    textAlign: 'center',
-  },
-  link: {
-    color: colors.green,
   },
 });
 

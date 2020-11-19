@@ -1,17 +1,11 @@
 import React, {useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import {View, ScrollView, Text, TextInput, StyleSheet} from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import {useDispatch} from 'react-redux';
 import {login} from '../redux/authReducer';
 import AppWrapper from '../components/AppWrapper/AppWrapper';
+import AppButton from '../components/AppButton/AppButton';
 
 const LoginScreen = ({navigation}) => {
   let [email, setEmail] = useState('');
@@ -51,14 +45,12 @@ const LoginScreen = ({navigation}) => {
             placeholderTextColor={colors.textColor}
             secureTextEntry={true}
           />
-          <TouchableOpacity
-            style={[styles.input, styles.button]}
-            onPress={auth}>
-            <Text style={styles.buttonText}>Войти</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
-            <Text style={styles.link}>Создать новый аккаунт</Text>
-          </TouchableOpacity>
+          <AppButton style={styles.button} text="Войти" onPress={auth} />
+          <AppButton
+            text="Создать новый аккаунт"
+            onPress={() => navigation.navigate('Registration')}
+            type="link"
+          />
         </View>
       </ScrollView>
     </AppWrapper>
@@ -99,11 +91,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 120,
-    justifyContent: 'center',
-  },
-  buttonText: {...fonts.smallHeading},
-  link: {
-    color: colors.green,
   },
 });
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import colors from '../../res/colors';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {addToShoppingCart} from '../../redux/userReducer';
-import fonts from '../../res/fonts';
+import AppButton from '../AppButton/AppButton';
 
 const AddToCartButton = (props) => {
   const inCart = useSelector((state) => state.user.cart);
@@ -16,39 +15,19 @@ const AddToCartButton = (props) => {
   };
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.input,
-        styles.button,
-        !props.stepperVal ? {opacity: 0.4} : null,
-      ]}
+    <AppButton
+      style={[styles.button, !props.stepperVal ? {opacity: 0.4} : null]}
+      text={isInCart ? 'Удалить из корзины' : 'Добавить в корзину'}
       onPress={addToCart}
-      disabled={!props.stepperVal}>
-      <Text style={styles.buttonText}>
-        {isInCart ? 'Удалить из корзины' : 'Добавить в корзину'}
-      </Text>
-    </TouchableOpacity>
+      disabled={!props.stepperVal}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 45,
-    width: '70%',
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: colors.textColor,
-    paddingHorizontal: 16.5,
-    marginBottom: 12,
-    ...fonts.text,
-    color: colors.headingColor,
-    //11
-  },
   button: {
-    // width: 120,
-    justifyContent: 'center',
+    width: '70%',
   },
-  buttonText: {...fonts.smallHeading},
 });
 
 export default AddToCartButton;
