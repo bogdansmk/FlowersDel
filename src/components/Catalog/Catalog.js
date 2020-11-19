@@ -26,7 +26,8 @@ const Catalog = ({
       header={header}
       headerHeight={headerHeight}
       title={title}
-      bottomNav={bottomNav}>
+      bottomNav={bottomNav}
+      backButton={false}>
       <FlatList
         data={items}
         renderItem={renderItem}
