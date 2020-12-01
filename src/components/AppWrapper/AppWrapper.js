@@ -48,9 +48,11 @@ const AppWrapper = ({
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
     backgroundColor: colors.green,
   },
   wrapper: {
+    flex: 1,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     backgroundColor: colors.darkWhite,
