@@ -1,22 +1,25 @@
-import React, {useState} from 'react';
-import {View, ScrollView, Text, Image, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 import colors from '../res/colors';
-import fonts from '../res/fonts';
-import UserProfile from '../components/UserProfile';
+import UserProfile from '../components/UserProfile/UserProfile';
 import LastOrders from '../components/LastOrders/LastOrders';
+import {useSelector} from 'react-redux';
 
 const ProfileScreen = (props) => {
+  const {name, orders} = useSelector((state) => state.user);
+
   return (
-    <ScrollView style={styles.profile}>
-      <UserProfile />
-      <LastOrders />
-    </ScrollView>
+    <View style={styles.profile}>
+      <UserProfile user={{name}} />
+      <LastOrders orders={orders} />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   profile: {
-    padding: 15,
+    flex: 1,
+    backgroundColor: colors.green,
   },
 });
 
