@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {addToShoppingCart} from '../../redux/userReducer';
 import AppButton from '../AppButton/AppButton';
+import colors from '../../res/colors';
 
 const AddToCartButton = (props) => {
   const inCart = useSelector((state) => state.user.cart);
@@ -16,7 +17,12 @@ const AddToCartButton = (props) => {
 
   return (
     <AppButton
-      style={[styles.button, !props.stepperVal ? {opacity: 0.4} : null]}
+      style={[
+        styles.button,
+        !props.stepperVal && {opacity: 0.4},
+        isInCart && {backgroundColor: colors.orange},
+      ]}
+      color={colors.darkWhite}
       text={isInCart ? 'Удалить из корзины' : 'Добавить в корзину'}
       onPress={addToCart}
       disabled={!props.stepperVal}
@@ -27,6 +33,9 @@ const AddToCartButton = (props) => {
 const styles = StyleSheet.create({
   button: {
     width: '70%',
+    backgroundColor: colors.green,
+    borderWidth: 0,
+    elevation: 5,
   },
 });
 

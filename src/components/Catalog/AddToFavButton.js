@@ -20,7 +20,7 @@ const AddToFavButton = (props) => {
       <Icon
         name={isFav ? 'heart' : 'heart-outline'}
         size={30}
-        color={isFav ? colors.yellow : colors.white}
+        color={isFav ? colors.yellow : colors.darkWhite}
       />
     </TouchableOpacity>
   );

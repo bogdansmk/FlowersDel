@@ -5,14 +5,21 @@ import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/core';
 
-const AppButton = ({text, onPress, type, style, size, ...props}) => {
+const AppButton = ({text, onPress, type, style, size, color, ...props}) => {
   const navigation = useNavigation();
 
   switch (type) {
     case 'link':
       return (
         <TouchableOpacity style={style} onPress={onPress} {...props}>
-          <Text style={[styles.link, size && {fontSize: size}]}>{text}</Text>
+          <Text
+            style={[
+              styles.link,
+              size && {fontSize: size},
+              color && {color: color},
+            ]}>
+            {text}
+          </Text>
         </TouchableOpacity>
       );
 
@@ -22,7 +29,7 @@ const AppButton = ({text, onPress, type, style, size, ...props}) => {
           style={[styles.icon, style]}
           onPress={() => navigation.goBack()}
           {...props}>
-          <Icon name="arrow-back" size={30} color={colors.white} />
+          <Icon name="arrow-back" size={30} color={colors.darkWhite} />
         </TouchableOpacity>
       );
 
@@ -32,7 +39,12 @@ const AppButton = ({text, onPress, type, style, size, ...props}) => {
           style={[styles.input, style]}
           onPress={onPress}
           {...props}>
-          <Text style={[styles.buttonText, size && {fontSize: size}]}>
+          <Text
+            style={[
+              styles.buttonText,
+              size && {fontSize: size},
+              color && {color: color},
+            ]}>
             {text}
           </Text>
         </TouchableOpacity>
