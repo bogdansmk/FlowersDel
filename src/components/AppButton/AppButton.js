@@ -5,22 +5,23 @@ import fonts from '../../res/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/core';
 
-const AppButton = ({text, onPress, type, style}) => {
+const AppButton = ({text, onPress, type, style, size, ...props}) => {
   const navigation = useNavigation();
 
   switch (type) {
     case 'link':
       return (
-        <TouchableOpacity onPress={onPress}>
-          <Text style={styles.link}>{text}</Text>
+        <TouchableOpacity style={style} onPress={onPress} {...props}>
+          <Text style={[styles.link, size && {fontSize: size}]}>{text}</Text>
         </TouchableOpacity>
       );
 
     case 'backButton':
       return (
         <TouchableOpacity
+          style={[styles.icon, style]}
           onPress={() => navigation.goBack()}
-          style={styles.icon}>
+          {...props}>
           <Icon name="arrow-back" size={30} color={colors.white} />
         </TouchableOpacity>
       );
@@ -28,9 +29,12 @@ const AppButton = ({text, onPress, type, style}) => {
     default:
       return (
         <TouchableOpacity
-          style={[styles.input, styles.button, style]}
-          onPress={onPress}>
-          <Text style={styles.buttonText}>{text}</Text>
+          style={[styles.input, style]}
+          onPress={onPress}
+          {...props}>
+          <Text style={[styles.buttonText, size && {fontSize: size}]}>
+            {text}
+          </Text>
         </TouchableOpacity>
       );
   }
@@ -40,7 +44,6 @@ const styles = StyleSheet.create({
   input: {
     height: 45,
     width: '100%',
-    // width: '65%',
     borderWidth: 1,
     borderRadius: 25,
     borderColor: colors.textColor,
@@ -48,11 +51,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     ...fonts.text,
     color: colors.headingColor,
-    //11
-  },
-  button: {
-    // width: 200,
     justifyContent: 'center',
+    //11
   },
   buttonText: {
     ...fonts.largeText,

@@ -68,12 +68,14 @@ const CatalogItemScreen = (props) => {
           <View style={styles.stepper}>
             <AppButton
               style={styles.stepperButton}
-              text="-"
+              size={22}
+              text="–"
               onPress={decreaseVal}
             />
             <Text style={styles.stepperCount}>{stepperVal}</Text>
             <AppButton
               style={styles.stepperButton}
+              size={22}
               text="+"
               onPress={increaseVal}
             />
@@ -144,7 +146,6 @@ const styles = StyleSheet.create({
   stepperButton: {
     width: 40,
     height: 40,
-    ...fonts.smallHeading,
     borderRadius: 10,
     paddingHorizontal: 0,
     marginBottom: 0,
