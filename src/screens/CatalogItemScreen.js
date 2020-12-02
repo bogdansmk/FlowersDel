@@ -1,11 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {
-  View,
-  ScrollView,
-  Text,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {View, ScrollView, Text, StyleSheet, Dimensions} from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,9 +7,17 @@ import AddToFavButton from '../components/Catalog/AddToFavButton';
 import AddToCartButton from '../components/Catalog/AddToCartButton';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
 import AppButton from '../components/AppButton/AppButton';
+import Slider from '../components/Slider/Slider';
 
 const CatalogItemScreen = (props) => {
   const item = props.route.params.item;
+
+  const itemImages = [
+    '../assets/images/img6.jpg',
+    '../assets/images/img6.jpg',
+    '../assets/images/img6.jpg',
+    '../assets/images/img6.jpg',
+  ];
 
   let [stepperVal, setStepperVal] = useState(1);
 
@@ -28,6 +30,9 @@ const CatalogItemScreen = (props) => {
     let str = n > 4 || n === 0 ? 'голосов' : 'голоса';
     return votes + ' ' + (n === 1 ? 'голос' : str);
   };
+
+  const imageWidth = Dimensions.get('window').width;
+  const headerHeight = imageWidth * 0.9;
 
   useLayoutEffect(() => {
     props.navigation.setOptions({
@@ -42,11 +47,8 @@ const CatalogItemScreen = (props) => {
         backgroundColor="transparent"
         translucent={true}
       />
-      <View style={styles.header}>
-        <ImageBackground
-          style={styles.img}
-          source={require('../assets/images/img6.jpg')}
-        />
+      <View style={{height: headerHeight}}>
+        <Slider images={itemImages} width={imageWidth} />
       </View>
       <View style={styles.body}>
         <Text style={styles.heading}>{item.name}</Text>
@@ -88,17 +90,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.darkWhite,
   },
-  header: {
-    flex: 1,
-    height: 330, // 300 + 30 of StatusBar
-  },
   img: {
     height: '100%',
     width: '100%',
   },
   body: {
     flex: 1,
-    // alignItems: 'center',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     paddingHorizontal: 25,
@@ -143,7 +140,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: 120,
     height: 40,
-    // backgroundColor: colors.pale,
   },
   stepperButton: {
     width: 40,
