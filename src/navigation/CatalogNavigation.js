@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import CatalogScreen from '../screens/CatalogScreen';
 import CatalogItemScreen from '../screens/CatalogItemScreen';
 import AddToFavButton from '../components/Catalog/AddToFavButton';
+import AppButton from '../components/AppButton/AppButton';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const CatalogNavigation = () => {
           headerRightContainerStyle: {
             paddingHorizontal: 15,
           },
+          headerLeft: () => <AppButton type="backButton" />,
         }}
       />
     </Stack.Navigator>
