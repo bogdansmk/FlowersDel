@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useLayoutEffect} from 'react';
 import {View, ScrollView, Text, StyleSheet, Dimensions} from 'react-native';
 import colors from '../res/colors';
 import fonts from '../res/fonts';
@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AddToFavButton from '../components/Catalog/AddToFavButton';
 import AddToCartButton from '../components/Catalog/AddToCartButton';
 import FocusAwareStatusBar from '../components/StatusBar/FocusAwareStatusBar';
-import AppButton from '../components/AppButton/AppButton';
 import Slider from '../components/Slider/Slider';
+import Stepper from '../components/Stepper/Stepper';
 
 const CatalogItemScreen = (props) => {
   const item = props.route.params.item;
@@ -18,12 +18,6 @@ const CatalogItemScreen = (props) => {
     '../assets/images/img6.jpg',
     '../assets/images/img6.jpg',
   ];
-
-  let [stepperVal, setStepperVal] = useState(1);
-
-  const increaseVal = () => setStepperVal(stepperVal + 1);
-  const decreaseVal = () =>
-    stepperVal ? setStepperVal(stepperVal - 1) : false;
 
   const formatVotes = (votes) => {
     let n = votes % 10;
@@ -65,23 +59,12 @@ const CatalogItemScreen = (props) => {
         </Text>
         <View style={styles.row}>
           <Text style={styles.price}>{item.price}</Text>
-          <View style={styles.stepper}>
-            <AppButton
-              style={styles.stepperButton}
-              size={22}
-              text="–"
-              onPress={decreaseVal}
-            />
-            <Text style={styles.stepperCount}>{stepperVal}</Text>
-            <AppButton
-              style={styles.stepperButton}
-              size={22}
-              text="+"
-              onPress={increaseVal}
-            />
-          </View>
+          <Stepper />
         </View>
-        <AddToCartButton stepperVal={stepperVal} item={item} />
+        <View style={styles.row}>
+          <AddToCartButton item={item} />
+          {/*<AddToCartButton stepperVal={stepperVal} item={item} />*/}
+        </View>
       </View>
     </ScrollView>
   );
@@ -135,24 +118,6 @@ const styles = StyleSheet.create({
     ...fonts.heading,
     fontWeight: '700',
     color: colors.green,
-  },
-  stepper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: 120,
-    height: 40,
-  },
-  stepperButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    paddingHorizontal: 0,
-    marginBottom: 0,
-  },
-  stepperCount: {
-    ...fonts.smallHeading,
-    fontWeight: '700',
   },
 });
 
