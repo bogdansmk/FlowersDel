@@ -3,15 +3,7 @@ import {TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import CatalogItem from './CatalogItem';
 import AppWrapper from '../AppWrapper/AppWrapper';
 
-const Catalog = ({
-  navigation,
-  items,
-  header,
-  headerHeight,
-  title,
-  bottomNav,
-  emptyComponent,
-}) => {
+const Catalog = ({navigation, items, header, title, emptyComponent}) => {
   const renderItem = ({item, index}) => (
     <TouchableOpacity
       activeOpacity={1.0}
@@ -22,12 +14,7 @@ const Catalog = ({
   );
 
   return (
-    <AppWrapper
-      header={header}
-      headerHeight={headerHeight}
-      title={title}
-      bottomNav={bottomNav}
-      backButton={false}>
+    <AppWrapper header={header} title={title} backButton={false}>
       <FlatList
         data={items}
         renderItem={renderItem}

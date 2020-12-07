@@ -36,7 +36,6 @@ const FavouritesScreen = ({navigation}) => {
     <Catalog
       title="Избранное"
       items={items}
-      bottomNav={true}
       emptyComponent={<EmptyFav />}
       navigation={navigation}
     />

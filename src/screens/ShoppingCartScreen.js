@@ -7,8 +7,6 @@ import AppButton from '../components/AppButton/AppButton';
 const ShoppingCartScreen = ({navigation}) => {
   const items = useSelector((state) => state.user.cart);
 
-  console.log(items);
-
   useLayoutEffect(() => {
     if (items.length) {
       navigation.setOptions({
@@ -38,7 +36,6 @@ const ShoppingCartScreen = ({navigation}) => {
     <Catalog
       title="Корзина"
       items={items}
-      bottomNav={true}
       emptyComponent={<EmptyCart />}
       navigation={navigation}
     />
