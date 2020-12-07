@@ -1,8 +1,6 @@
 import React, {useLayoutEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Catalog from '../components/Catalog/Catalog';
 import {useSelector} from 'react-redux';
-import AppButton from '../components/AppButton/AppButton';
+import Cart from '../components/Cart/Cart';
 
 const ShoppingCartScreen = ({navigation}) => {
   const items = useSelector((state) => state.user.cart);
@@ -19,38 +17,7 @@ const ShoppingCartScreen = ({navigation}) => {
     }
   }, [navigation, items]);
 
-  const EmptyCart = () => {
-    return (
-      <View style={styles.emptyCart}>
-        <Text>В корзине пока нет товаров</Text>
-        <AppButton
-          style={styles.button}
-          text="Перейти в каталог"
-          onPress={() => navigation.navigate('Catalog')}
-        />
-      </View>
-    );
-  };
-
-  return (
-    <Catalog
-      title="Корзина"
-      items={items}
-      emptyComponent={<EmptyCart />}
-      navigation={navigation}
-    />
-  );
+  return <Cart items={items} navigation={navigation} />;
 };
-
-const styles = StyleSheet.create({
-  emptyCart: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    width: '70%',
-  },
-});
 
 export default ShoppingCartScreen;
