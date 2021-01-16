@@ -19,7 +19,6 @@ const AddToCartButton = (props) => {
     <AppButton
       style={[
         styles.button,
-        // !props.stepperVal && {opacity: 0.4},
         isInCart && {backgroundColor: colors.orange},
         props.style,
       ]}
@@ -28,7 +27,6 @@ const AddToCartButton = (props) => {
         props.text || (isInCart ? 'Удалить из корзины' : 'Добавить в корзину')
       }
       onPress={addToCart}
-      // disabled={!props.stepperVal}
     />
   );
 };
