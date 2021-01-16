@@ -85,7 +85,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case 'ADD-TO-CART':
-      const isInCart = state.cart.indexOf(action.payload) !== -1;
+      const isInCart = state.cart.some((item) => item.id === action.payload.id);
 
       return {
         ...state,

@@ -7,19 +7,19 @@ import colors from '../../res/colors';
 
 const AddToCartButton = (props) => {
   const inCart = useSelector((state) => state.user.cart);
-  const isInCart = inCart.indexOf(props.item) !== -1;
+  const isInCart = inCart.some((item) => item.id === props.item.id);
 
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addToShoppingCart(props.item));
+    dispatch(addToShoppingCart({...props.item, count: props.stepperVal}));
   };
 
   return (
     <AppButton
       style={[
         styles.button,
-        !props.stepperVal && {opacity: 0.4},
+        // !props.stepperVal && {opacity: 0.4},
         isInCart && {backgroundColor: colors.orange},
         props.style,
       ]}
@@ -28,7 +28,7 @@ const AddToCartButton = (props) => {
         props.text || (isInCart ? 'Удалить из корзины' : 'Добавить в корзину')
       }
       onPress={addToCart}
-      disabled={!props.stepperVal}
+      // disabled={!props.stepperVal}
     />
   );
 };
